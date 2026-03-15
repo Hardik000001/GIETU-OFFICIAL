@@ -1,0 +1,210 @@
+@import "tailwindcss";
+
+@keyframes scrollUp {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+.scroll-up {
+  animation-name: scrollUp;
+  animation-duration: 10s; 
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+body,html {
+  margin: 0;
+  padding: 0;
+}
+/* ===== ALUMNI SECTION ===== */
+
+.alumniSection{
+padding:80px 0;
+text-align:center;
+background:#f5f7fb;
+overflow:hidden;
+}
+
+.sectionTitle{
+font-size:42px;
+font-weight:700;
+color:rgb(184, 6, 6);
+margin-bottom:60px;
+}
+
+/* Container */
+
+.alumniContainer{
+display:flex;
+gap:40px;
+flex-wrap:nowrap;
+justify-content:flex-start;
+width:max-content;
+animation:scrollAlumni 20s linear infinite;
+}
+
+/* Card */
+
+.alumniCard{
+background:white;
+width:300px;
+padding:60px 25px 30px 25px;
+border-radius:20px;
+box-shadow:0 6px 18px rgba(0,0,0,0.08);
+position:relative;
+transition:0.3s;
+flex-shrink:0;
+}
+
+.alumniCard:hover{
+transform:translateY(-10px);
+}
+
+/* Circle Avatar */
+
+.alumniImage{
+position:absolute;
+top:-45px;
+left:50%;
+transform:translateX(-50%);
+width:90px;
+height:90px;
+border-radius:50%;
+border:4px solid rgb(184, 6, 6);
+background:white;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:bold;
+font-size:26px;
+}
+
+/* Text */
+
+.alumniCard h3{
+margin-top:20px;
+font-size:20px;
+color:rgb(184, 6, 6);
+}
+
+.alumniCard p{
+color:#555;
+margin-top:6px;
+line-height:1.5;
+}
+
+.alumniCard span{
+display:block;
+margin-top:10px;
+font-weight:600;
+color:red;
+}
+
+/* Continuous Scroll Animation */
+
+@keyframes scrollAlumni{
+0%{
+transform:translateX(0);
+}
+100%{
+transform:translateX(-50%);
+}
+}
+
+.certificationSection{
+text-align:center;
+padding:80px 8%;
+}
+
+.titleLine{
+width:70px;
+height:4px;
+background:rgb(184, 6, 6);
+margin:15px auto 30px auto;
+border-radius:3px;
+}
+
+.companyGrid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:35px;
+margin-top:40px;
+}
+
+.companyCard{
+background:white;
+border-radius:18px;
+padding:35px;
+border:2px solid #e3e6eb;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+box-shadow:0 6px 15px rgba(0,0,0,0.08);
+transition:0.3s;
+}
+
+.companyCard:hover{
+transform:translateY(-6px);
+}
+
+.companyCard img{
+width:120px;
+height:70px;
+object-fit:contain;
+}
+
+/* Placement Stats Section */
+
+.placementStats{
+padding:80px 8%;
+background:#f5f7fb;
+}
+
+.statsWrapper{
+max-width:1200px;
+margin:auto;
+}
+
+.statsContainer{
+display:grid;
+grid-template-columns:1.5fr 1fr 1fr 1fr 1fr;
+background:#f4f4f4;
+border-radius:6px;
+overflow:hidden;
+}
+
+.statsLeft{
+background:#f4c542;
+display:flex;
+align-items:center;
+padding:40px;
+}
+
+.statsLeft h2{
+font-size:34px;
+line-height:1.3;
+font-weight:600;
+color:#1a1a1a;
+}
+
+.statBox{
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+padding:35px;
+border-left:1px solid #ddd;
+text-align:center;
+}
+
+.statBox h3{
+font-size:28px;
+margin-bottom:6px;
+color:#333;
+}
+
+.statBox p{
+font-size:15px;
+color:#666;
+}
