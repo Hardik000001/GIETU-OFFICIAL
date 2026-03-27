@@ -28,12 +28,22 @@ His interests include Computer Vision, Cyber Security, Software Engineering, Clo
     id: 3,
     name: "Mr. Mahesh Kumar Dakua",
     designation: "Assistant Professor",
-    email: "anay@giet.edu",
+    email: "maheshdakua@giet.edu",
     image: "/MaheshSir.png",
     bio: `Mr. Mahesh Kumar Dakua is an Assistant Professor in the Department of Computer Science and Engineering at GIET University, Gunupur, Odisha. He is a Subject Expert in Data Science and is currently pursuing his Ph.D. at KIIT Deemed to be University, Bhubaneswar.
 
 His research interests include Data Science, Edge Computing, Cloud Computing, IoT, DBMS, Artificial Intelligence, and Python Programming. He is an IEEE member and a lifetime member of ISTE.`,
   },
+  {
+  id: 4,
+    name: "Mr. Soumya Ranjan Mishra",
+    designation: "Assistant Professor",
+    email: "soumyaranjan@giet.edu",
+    image: "/image.png",
+    bio:` Mr. Soumya Ranjan Mishra (IEEE and ISTE Member, Wipro Certified Faculty) is an Assistant Professor in the Department of Computer Science and Applications at Gandhi Institute of Engineering and Technology University (GIET University), Odisha, Gunupur, Rayagada, India.
+His areas of specialization include Artificial Intelligence, Machine Learning, Image Processing, and Computer Vision. S. R. Mishra has published more than eighteen (18) research papers in reputed international journals and conference proceedings. He is also the holder of four (4) patents in the fields of healthcare and computer science, reflecting his contributions to applied research and innovation. He is also the author of a book and has actively contributed to academic mentoring by guided numerous B.Tech, MCA, and BCA students in their academic projects and research work.`,
+}
+
 ];
 
 function FacultyProfile() {
@@ -51,15 +61,24 @@ function FacultyProfile() {
         {/* TOP PROFILE SECTION */}
         <div className="flex flex-col md:flex-row gap-12 items-start">
 
-          {/* LEFT IMAGE */}
+          {/* LEFT IMAGE (UPDATED CLEAN DESIGN) */}
           <div className="w-full md:w-1/3 flex justify-center">
-          <img
-            src={faculty.image}
-            alt={faculty.name}
-            className="w-64 md:w-72 h-auto rounded-lg object-cover"
-          />
-        </div>
+            <div className="relative group">
 
+              {/* SOFT BACKGROUND */}
+              <div className="absolute -inset-2 bg-gray-100 rounded-2xl"></div>
+
+              {/* IMAGE CARD */}
+              <div className="relative bg-white p-2 rounded-2xl shadow-md group-hover:shadow-lg transition duration-300">
+                <img
+                  src={faculty.image}
+                  alt={faculty.name}
+                  className="w-48 md:w-56 h-auto rounded-xl object-cover transition duration-300 group-hover:scale-105"
+                />
+              </div>
+
+            </div>
+          </div>
 
           {/* RIGHT DETAILS */}
           <div className="w-full md:w-2/3 mt-6 md:mt-12">

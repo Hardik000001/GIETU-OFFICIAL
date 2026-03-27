@@ -25,12 +25,12 @@ router.post("/create", async (req, res) => {
 
     const admin = await Admin.create({
       email,
-      password: hashedPassword
+      password: hashedPassword,
     });
 
     res.status(201).json({
       message: "Admin created successfully",
-      adminId: admin._id
+      adminId: admin._id,
     });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -49,30 +49,34 @@ router.post("/login", async (req, res) => {
     }
 
     const admin = await Admin.findOne({ email });
+
     if (!admin) {
       return res.status(400).json({ message: "Invalid email or password" });
     }
 
     const isMatch = await bcrypt.compare(password, admin.password);
+
     if (!isMatch) {
       return res.status(400).json({ message: "Invalid email or password" });
     }
 
-    // 🔐 CREATE JWT TOKEN (FIXED)
+    // ✅ FIXED: SAME SECRET AS .env
     const token = jwt.sign(
       {
-        id: admin._id,        // 👈 REQUIRED for middleware
-        adminId: admin._id    // 👈 keeping your original field
+        id: admin._id,
+        adminId: admin._id,
       },
-      "supersecretkey",
+      process.env.JWT_SECRET,   // 🔥 IMPORTANT FIX
       { expiresIn: "1d" }
     );
 
     res.status(200).json({
       message: "Login successful",
-      token
+      token,
     });
+
   } catch (err) {
+    console.error(err);
     res.status(500).json({ error: err.message });
   }
 });

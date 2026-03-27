@@ -4,9 +4,16 @@ const cloudinary = require("../config/cloudinary");
 
 const storage = new CloudinaryStorage({
   cloudinary,
-  params: {
-    folder: "GIET_DeptConnect",
-    allowed_formats: ["jpg", "jpeg", "png"],
+  params: async (req, file) => {
+
+    // 🔥 CHECK FILE TYPE
+    let resourceType = "auto"; // auto = image + pdf dono handle karega
+
+    return {
+      folder: "GIET_DeptConnect",
+      resource_type: resourceType,
+      allowed_formats: ["jpg", "jpeg", "png", "pdf"], // ✅ PDF ADD
+    };
   },
 });
 

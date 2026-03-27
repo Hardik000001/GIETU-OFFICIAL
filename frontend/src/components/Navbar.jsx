@@ -53,7 +53,7 @@ function Navbar() {
           </Link>
 
           <a
-            href="#toppers"
+            href="/Events"
             className="relative text-gray-800 transition duration-300 hover:text-red-700 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-red-700 after:transition-all after:duration-300 hover:after:w-full"
           >
             Events

@@ -40,7 +40,7 @@ router.put("/:id", async (req, res) => {
 // DELETE
 router.delete("/:id", async (req, res) => {
   try {
-    await Model.findByIdAndDelete(req.params.id);
+    await Announcement.findByIdAndDelete(req.params.id);
     res.json({ message: "Deleted successfully" });
   } catch (err) {
     res.status(500).json({ error: err.message });
