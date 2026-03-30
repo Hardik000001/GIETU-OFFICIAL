@@ -93,8 +93,9 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import About from "./pages/About";
+import Activities from "./pages/Activities";
 import PYQ from "./pages/PYQ"; // 🔥 ADD THIS
-import Events from "./pages/Events"; // 🔥 ADD THIS
+
 
 function Layout({ children }) {
   const location = useLocation();
@@ -125,7 +126,7 @@ function App() {
 
           {/* SECTIONS */}
           <Route path="/achievements" element={<Achievements />} />
-          <Route path="/events" element={<Events />} />
+          <Route path="/activities" element={<Activities />} />
           <Route path="/placement" element={<Placement />} />
 
           {/* 🔥 PYQ PAGE */}

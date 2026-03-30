@@ -31,47 +31,23 @@ function Navbar() {
         {/* LINKS */}
         <div className="flex items-center gap-6 font-medium">
 
+          <Link to="/" className="navLink">Home</Link>
+
+          <Link to="/about" className="navLink">About Us</Link>
+
+          <Link to="/faculty" className="navLink">Faculty</Link>
+
+          {/* 🔥 NEW ACTIVITIES LINK */}
           <Link
-            to="/"
+            to="/activities"
             className="relative text-gray-800 transition duration-300 hover:text-red-700 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-red-700 after:transition-all after:duration-300 hover:after:w-full"
           >
-            Home
+            Activities
           </Link>
 
-          <Link
-            to="/about"
-            className="relative text-gray-800 transition duration-300 hover:text-red-700 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-red-700 after:transition-all after:duration-300 hover:after:w-full"
-          >
-            About Us
-          </Link>
+          <Link to="/achievements" className="navLink">Achievements</Link>
 
-          <Link
-            to="/faculty"
-            className="relative text-gray-800 transition duration-300 hover:text-red-700 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-red-700 after:transition-all after:duration-300 hover:after:w-full"
-          >
-            Faculty
-          </Link>
-
-          <a
-            href="/Events"
-            className="relative text-gray-800 transition duration-300 hover:text-red-700 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-red-700 after:transition-all after:duration-300 hover:after:w-full"
-          >
-            Events
-          </a>
-
-          <a
-            href="/achievements"
-            className="relative text-gray-800 transition duration-300 hover:text-red-700 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-red-700 after:transition-all after:duration-300 hover:after:w-full"
-          >
-            Achievements
-          </a>
-
-          <a
-            href="/Placement"
-            className="relative text-gray-800 transition duration-300 hover:text-red-700 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-red-700 after:transition-all after:duration-300 hover:after:w-full"
-          >
-            Placements
-          </a>
+          <Link to="/placement" className="navLink">Placements</Link>
 
           {!isAdmin ? (
             <Link
