@@ -25,15 +25,21 @@ function Dashboard() {
   const [editingActivityId, setEditingActivityId] = useState(null);
   const [editingPyqId, setEditingPyqId] = useState(null);
 
+
+  const [faculties, setFaculties] = useState([]);
+  const [bio, setBio] = useState("");
+  const [editingFacultyId, setEditingFacultyId] = useState(null);
+
   const token = localStorage.getItem("adminToken");
 
   const fetchData = async () => {
-    const [n, a, e, p, act] = await Promise.all([
+    const [n, a, e, p, act, f] = await Promise.all([
       axios.get("http://localhost:5000/api/notices"),
       axios.get("http://localhost:5000/api/announcements"),
       axios.get("http://localhost:5000/api/events"),
       axios.get("http://localhost:5000/api/pyq"),
       axios.get("http://localhost:5000/api/activities"),
+      axios.get("http://localhost:5000/api/faculty"),
     ]);
 
     setNotices(n.data);
@@ -41,6 +47,7 @@ function Dashboard() {
     setEvents(e.data);
     setPyqs(p.data);
     setActivities(act.data);
+    setFaculties(f.data);
   };
 
   useEffect(() => {
@@ -59,6 +66,7 @@ function Dashboard() {
     setEditingEventId(null);
     setEditingActivityId(null);
     setEditingPyqId(null);
+    setEditingFacultyId(null);
   };
 
   const handleSubmit = async (e) => {
@@ -73,6 +81,19 @@ function Dashboard() {
         editingNoticeId
           ? await axios.put(`http://localhost:5000/api/notices/${editingNoticeId}`, { title, description }, config)
           : await axios.post("http://localhost:5000/api/notices", { title, description }, config);
+      }
+      if (active === "faculty") {
+        const data = {
+          name: title,
+          designation: description,
+          email: subject,
+          image: year,
+          bio: bio,
+        };
+
+        editingFacultyId
+          ? await axios.put(`http://localhost:5000/api/faculty/${editingFacultyId}`, data, config)
+          : await axios.post("http://localhost:5000/api/faculty", data, config);
       }
 
       if (active === "announcement") {
@@ -139,9 +160,18 @@ function Dashboard() {
       setYear(item.year);
       setEditingPyqId(item._id);
     }
+    if (type === "faculty") {
+      setActive("faculty");
+      setTitle(item.name);
+      setDescription(item.designation);
+      setSubject(item.email);
+      setYear(item.image);
+      setBio(item.bio);
+      setEditingFacultyId(item._id);
+    }
   };
 
-  const menu = ["notice", "announcement", "event", "activities", "pyq"];
+  const menu = ["notice", "announcement", "event", "activities", "pyq", "faculty"];
 
   return (
     <div className="flex min-h-screen bg-gray-100">
@@ -176,7 +206,7 @@ function Dashboard() {
               className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-red-500"
             />
 
-            {active !== "pyq" && (
+            {active !== "pyq" && active !== "faculty" && (
               <textarea
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
@@ -193,7 +223,44 @@ function Dashboard() {
                 className="w-full border rounded-lg p-3"
               />
             )}
+            {active === "faculty" && (
+              <>
+                <input
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  placeholder="Name"
+                  className="w-full border p-3 rounded-lg"
+                />
 
+                <input
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  placeholder="Designation"
+                  className="w-full border p-3 rounded-lg"
+                />
+
+                <input
+                  value={subject}
+                  onChange={(e) => setSubject(e.target.value)}
+                  placeholder="Email"
+                  className="w-full border p-3 rounded-lg"
+                />
+
+                <input
+                  value={year}
+                  onChange={(e) => setYear(e.target.value)}
+                  placeholder="Image URL"
+                  className="w-full border p-3 rounded-lg"
+                />
+
+                <textarea
+                  value={bio}
+                  onChange={(e) => setBio(e.target.value)}
+                  placeholder="Bio"
+                  className="w-full border p-3 rounded-lg"
+                />
+              </>
+            )}
             {active === "pyq" && (
               <>
                 <input
@@ -214,7 +281,7 @@ function Dashboard() {
 
             <button className="flex items-center gap-2 bg-red-700 hover:bg-red-800 text-white px-5 py-2 rounded-lg">
               <Plus size={18} />
-              {editingNoticeId || editingAnnouncementId || editingEventId || editingActivityId || editingPyqId
+              {editingNoticeId || editingAnnouncementId || editingEventId || editingActivityId || editingPyqId || editingFacultyId
                 ? "Update"
                 : "Add"}
             </button>
@@ -235,6 +302,25 @@ function Dashboard() {
                   <Pencil size={16} />
                 </button>
                 <button onClick={() => handleDelete("notices", n._id)} className="p-2 bg-red-500 text-white rounded-lg">
+                  <Trash2 size={16} />
+                </button>
+              </div>
+            </div>
+          ))}
+          {active === "faculty" && faculties.map((f) => (
+            <div key={f._id} className="bg-white p-4 rounded-xl shadow flex justify-between">
+              <div>
+                <h3 className="font-semibold">{f.name}</h3>
+                <p>{f.designation}</p>
+                <p className="text-blue-500">{f.email}</p>
+              </div>
+
+              <div className="flex gap-2">
+                <button onClick={() => handleEdit("faculty", f)} className="p-2 bg-yellow-400 rounded-lg">
+                  <Pencil size={16} />
+                </button>
+
+                <button onClick={() => handleDelete("faculty", f._id)} className="p-2 bg-red-500 text-white rounded-lg">
                   <Trash2 size={16} />
                 </button>
               </div>

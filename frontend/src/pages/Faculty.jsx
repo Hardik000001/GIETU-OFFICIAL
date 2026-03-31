@@ -1,39 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
-const facultyData = [
-  {
-    id: 1,
-    name: "Prof. Satya Narayan Das",
-    designation: "Head of the Department",
-    email: "sndas@giet.edu",
-    image: "hod.png",
-  },
-  {
-    id: 2,
-    name: "Mr. Prahallad kumar Sahu",
-    designation: "Batch Coordinator",
-    email: "anay@giet.edu",
-    image: "PrahalladSir.jpeg",
-  },
-  {
-    id: 3,
-    name: "Mr. Mahesh kumar Dakua",
-    designation: "Assistant Professor",
-    email: "maheshdakua@giet.edu",
-    image: "MaheshSir.png",
-  },
-  {
-    id: 4,
-    name: " Mr. Soumya Ranjan Mishra",
-    designation: "Assistant Professor",
-    email: "soumyaranjan@giet.edu",
-    image: "image.png",
-  },
-
-];
+import axios from "axios";
 
 function Faculty() {
+  const [facultyData, setFacultyData] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/faculty")
+      .then((res) => setFacultyData(res.data))
+      .catch((err) => console.error(err));
+  }, []);
+
   return (
     <div className="bg-gradient-to-br from-red-50 via-white to-red-100 py-16">
       <div className="max-w-6xl mx-auto px-6">
@@ -48,8 +26,8 @@ function Faculty() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
             {facultyData.map((faculty, index) => (
               <Link
-                key={faculty.id}
-                to={`/faculty/${faculty.id}`}
+                key={faculty._id}
+                to={`/faculty/${faculty._id}`}
                 className="group"
               >
                 <div

@@ -72,3 +72,32 @@ exports.getAll = async (req, res) => {
         res.status(500).json({ msg: "Server Error" });
     }
 };
+exports.getRegistrationsByActivity = async (req, res) => {
+    try {
+        const data = await Registration.aggregate([
+            {
+                $group: {
+                    _id: "$activityId",
+                    activityTitle: { $first: "$activityTitle" },
+                    users: {
+                        $push: {
+                            name: "$name",
+                            email: "$email",
+                            branch: "$branch",
+                            roll: "$roll"
+                        }
+                    }
+                }
+            },
+            {
+                $sort: { activityTitle: 1 }
+            }
+        ]);
+
+        res.json(data);
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ msg: "Server Error" });
+    }
+};

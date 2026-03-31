@@ -26,7 +26,7 @@ app.use("/api/pyq", require("./routes/pyqRoutes"));
 /* 🔥 NEW (IMPORTANT) */
 app.use("/api/activities", require("./routes/activityRoutes"));
 app.use("/api/registrations", require("./routes/registrationRoutes"));
-
+app.use("/api/faculty", require("./routes/facultyRoutes"));
 /* SERVER */
 const PORT = process.env.PORT || 5000;
 
