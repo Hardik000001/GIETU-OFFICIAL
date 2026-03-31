@@ -28,6 +28,8 @@ app.use("/api/activities", require("./routes/activityRoutes"));
 app.use("/api/registrations", require("./routes/registrationRoutes"));
 app.use("/api/faculty", require("./routes/facultyRoutes"));
 /* SERVER */
+/* 🔥 ADD ACHIEVEMENT ROUTES */
+app.use("/api/achievements", require("./routes/achievementRoutes"));
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
